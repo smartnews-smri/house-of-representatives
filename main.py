@@ -236,7 +236,7 @@ def parse_kaiji(kaiji):
       gian_all.append(kaiji_row)
 
   # Get index of kaiji
-  index = 1
+  index = len(gian_all)
   for i, kaiji_row in enumerate(gian_all):
     if i == 0:
       continue
