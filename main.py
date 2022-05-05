@@ -223,34 +223,93 @@ def parse_kaiji(kaiji):
 
     return result
 
+
+  def update_gian_all(kaiji, result):
+    # Get existing kaiji CSV
+    gian_all_raw = get_csv(DIR_DATA + "gian_all.csv")
+
+    # Delete existing kaiji row
+    gian_all = []
+    for kaiji_row in gian_all_raw:
+      if kaiji_row[0] != kaiji:
+        gian_all.append(kaiji_row)
+
+    # Get index of kaiji
+    index = len(gian_all)
+    for i, kaiji_row in enumerate(gian_all):
+      if i == 0:
+        continue
+      if int(kaiji_row[0]) > int(kaiji):
+        index = i
+        break
+
+    # Insert into gian_all
+    for row in result[1:]:
+      gian_all.insert(index, row)
+      index += 1
+
+    save_file(DIR_DATA + "gian_all.csv", gian_all)
+    save_file(DIR_DATA + "gian_all.json", gian_all)
+
+
+  def update_gian_summary():
+    gian_all = get_csv(DIR_DATA + "gian_all.csv")
+    gian_sum = []
+
+    for a_row in gian_all:
+      s_index = -1
+
+      appendrow = [
+        a_row[6],
+        a_row[7],
+        a_row[8],
+        a_row[9],
+        a_row[10],
+        a_row[16],
+        a_row[17],
+        a_row[18],
+        a_row[19],
+        a_row[20],
+        a_row[21],
+        a_row[22],
+        a_row[23],
+        a_row[24],
+        a_row[25],
+        a_row[26],
+        a_row[27],
+        a_row[28],
+        a_row[29],
+        a_row[30],
+        a_row[31]
+      ]
+
+      for i, s_row in enumerate(gian_sum):
+        if s_row[0] == a_row[11] and s_row[1] == a_row[12] and s_row[2] == a_row[13] and s_row[3] == a_row[14]:
+          s_index = i
+
+      if s_index >= 0:
+        gian_sum[s_index][5] = a_row[6]
+        gian_sum[s_index][6].append(appendrow)
+      else:
+        newrow = [
+          a_row[11],
+          a_row[12],
+          a_row[13],
+          a_row[14],
+          a_row[6],
+          a_row[15],
+          appendrow
+        ]
+
+        gian_sum.append(newrow)
+
+    save_file(DIR_DATA + "gian_summary.json", gian_sum)
+
+
   result = parse_kaiji_main(kaiji)
   result = parse_keika_all(kaiji, result)
-
-  # Get existing kaiji CSV
-  gian_all_raw = get_csv(DIR_DATA + "gian_all.csv")
-
-  # Delete existing kaiji row
-  gian_all = []
-  for kaiji_row in gian_all_raw:
-    if kaiji_row[0] != kaiji:
-      gian_all.append(kaiji_row)
-
-  # Get index of kaiji
-  index = len(gian_all)
-  for i, kaiji_row in enumerate(gian_all):
-    if i == 0:
-      continue
-    if int(kaiji_row[0]) > int(kaiji):
-      index = i
-      break
-
-  # Insert into gian_all
-  for row in result[1:]:
-    gian_all.insert(index, row)
-    index += 1
-
-  save_file(DIR_DATA + "gian_all.csv", gian_all)
-  save_file(DIR_DATA + "gian_all.json", gian_all)
+  update_gian_all(kaiji, result)
+  update_gian_summary()
 
 
 
