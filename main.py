@@ -310,9 +310,9 @@ def parse_kaiji(kaiji):
     save_file(DIR_DATA + "gian_summary.json", gian_sum)
 
 
-  #result = parse_kaiji_main(kaiji)
-  #result = parse_keika_all(kaiji, result)
-  #update_gian_all(kaiji, result)
+  result = parse_kaiji_main(kaiji)
+  result = parse_keika_all(kaiji, result)
+  update_gian_all(kaiji, result)
   update_gian_summary()
 
 
