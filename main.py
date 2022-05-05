@@ -260,6 +260,7 @@ def parse_kaiji(kaiji):
       s_index = -1
 
       appendrow = [
+        a_row[0],
         a_row[6],
         a_row[7],
         a_row[8],
@@ -288,14 +289,17 @@ def parse_kaiji(kaiji):
           s_index = i
 
       if s_index >= 0:
+        gian_sum[s_index][4] = a_row[0]
         gian_sum[s_index][5] = a_row[6]
-        gian_sum[s_index][6].append(appendrow)
+        gian_sum[s_index][6] = a_row[15]
+        gian_sum[s_index][7].append(appendrow)
       else:
         newrow = [
           a_row[11],
           a_row[12],
           a_row[13],
           a_row[14],
+          a_row[0],
           a_row[6],
           a_row[15],
           [appendrow]
@@ -306,9 +310,9 @@ def parse_kaiji(kaiji):
     save_file(DIR_DATA + "gian_summary.json", gian_sum)
 
 
-  result = parse_kaiji_main(kaiji)
-  result = parse_keika_all(kaiji, result)
-  update_gian_all(kaiji, result)
+  #result = parse_kaiji_main(kaiji)
+  #result = parse_keika_all(kaiji, result)
+  #update_gian_all(kaiji, result)
   update_gian_summary()
 
 
