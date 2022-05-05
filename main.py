@@ -256,7 +256,7 @@ def parse_kaiji(kaiji):
     gian_all = get_csv(DIR_DATA + "gian_all.csv")
     gian_sum = []
 
-    for a_row in gian_all:
+    for a_row in gian_all[1:]:
       s_index = -1
 
       appendrow = [
@@ -298,7 +298,7 @@ def parse_kaiji(kaiji):
           a_row[14],
           a_row[6],
           a_row[15],
-          appendrow
+          [appendrow]
         ]
 
         gian_sum.append(newrow)
