@@ -113,9 +113,6 @@ def parse_kaiji(kaiji):
       "本文情報",
       "本文情報URL",
       "議案種類",
-      "議案提出回次",
-      "議案番号",
-      "議案件名",
       "議案提出者",
       "衆議院予備審査議案受理年月日",
       "衆議院予備付託年月日／衆議院予備付託委員会",
@@ -210,6 +207,10 @@ def parse_kaiji(kaiji):
           naiyos.append(td.text)
 
       for i, komoku in enumerate(komokus):
+
+        if komoku == "議案提出回次" or komoku == "議案番号":
+          continue
+
         naiyo = naiyos[i]
         naiyo = naiyo.replace("\r", "");
         naiyo = naiyo.replace("\n", "");
@@ -266,6 +267,9 @@ def parse_kaiji(kaiji):
         a_row[8],
         a_row[9],
         a_row[10],
+        a_row[13],
+        a_row[14],
+        a_row[15],
         a_row[16],
         a_row[17],
         a_row[18],
@@ -278,30 +282,27 @@ def parse_kaiji(kaiji):
         a_row[25],
         a_row[26],
         a_row[27],
-        a_row[28],
-        a_row[29],
-        a_row[30],
-        a_row[31]
+        a_row[28]
       ]
 
       for i, s_row in enumerate(gian_sum):
-        if s_row[0] == a_row[11] and s_row[1] == a_row[12] and s_row[2] == a_row[13] and s_row[3] == a_row[14]:
+        if s_row[0] == a_row[11] and s_row[1] == a_row[3] and s_row[2] == a_row[4] and s_row[3] == a_row[5]:
           s_index = i
 
       if s_index >= 0:
         gian_sum[s_index][4] = a_row[0]
         gian_sum[s_index][5] = a_row[6]
-        gian_sum[s_index][6] = a_row[15]
+        gian_sum[s_index][6] = a_row[12]
         gian_sum[s_index][7].append(appendrow)
       else:
         newrow = [
           a_row[11],
-          a_row[12],
-          a_row[13],
-          a_row[14],
+          a_row[3],
+          a_row[4],
+          a_row[5],
           a_row[0],
           a_row[6],
-          a_row[15],
+          a_row[12],
           [appendrow]
         ]
 
@@ -312,8 +313,9 @@ def parse_kaiji(kaiji):
 
   result = parse_kaiji_main(kaiji)
   result = parse_keika_all(kaiji, result)
+
   update_gian_all(kaiji, result)
-  update_gian_summary()
+  #update_gian_summary()
 
 
 
@@ -334,6 +336,5 @@ def update_time():
 #-------------------------------------------------------------
 
 DIR_DATA = get_content_folder()
-
 parse_kaiji(get_latest_kaiji())
 update_time()
