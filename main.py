@@ -315,7 +315,7 @@ def parse_kaiji(kaiji):
   result = parse_keika_all(kaiji, result)
 
   update_gian_all(kaiji, result)
-  #update_gian_summary()
+  update_gian_summary()
 
 
 
