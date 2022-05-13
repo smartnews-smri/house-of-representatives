@@ -267,6 +267,8 @@ def parse_kaiji(kaiji):
         a_row[8],
         a_row[9],
         a_row[10],
+        a_row[11],
+        a_row[12],
         a_row[13],
         a_row[14],
         a_row[15],
@@ -296,11 +298,11 @@ def parse_kaiji(kaiji):
         gian_sum[s_index][7].append(appendrow)
       else:
         newrow = [
-          a_row[11],
-          a_row[3],
-          a_row[4],
-          a_row[5],
-          a_row[0],
+          a_row[11],    # 議案種類
+          a_row[3],     # 提出回次
+          a_row[4],     # 番号
+          a_row[5],     # 議案件名
+          a_row[0],     # 掲載回次
           a_row[6],
           a_row[12],
           [appendrow]
