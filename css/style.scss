@@ -1,0 +1,658 @@
+@charset "UTF-8";
+
+$width-2col: 720px;
+$width-3col: 1440px;
+$box-width: 520px;
+
+$box-background: #fefefe;
+
+$box-large: 640px;
+
+$color-medical-staff: #8DABA1;
+$color-senior-citizen: #8fb5ba;
+
+
+$mobile-max-width: 428px;
+
+
+@mixin box-large(){
+  @media screen and (min-width: $box-width) and (max-width: $width-2col - 1){
+    @content
+  }
+
+  @media screen and (min-width: $box-width * 2){
+    @content
+  }
+}
+
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, '游ゴシック体', YuGothic, 'Yu Gothic Medium', 'Noto Sans JP', sans-serif;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: 0.03em;
+}
+
+body {
+  width: 100%;
+  background-color: #edeff0;
+  overflow-y: scroll;
+  color: #333;
+  font-size: 16px;
+  font-weight: normal;
+
+  a {
+    color: inherit;
+  }
+
+  hr {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  input,textarea,select {
+    font-size: 16px;
+    padding: 8px 20px;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    background-color: #fefefe;
+
+    &:focus {
+      animation: shadow 2s linear 0s infinite forwards;
+
+      @keyframes shadow {
+      	0%,
+      	100% {
+          box-shadow: 0px 0px 4px #03fccf;
+      	}
+      	50% {
+          box-shadow: 0px 0px 4px #98b5ac;
+      	}
+      }
+    }
+  }
+
+  select {
+    appearance: none;
+    background-image: url(../img/material-icon-arrow-down.svg);
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px) calc(50% + 1px);
+    padding: 8px 48px 8px 20px;
+  }
+
+  .sn-color {
+    background: linear-gradient(90deg,#ff645b,#ff645b 25%,#ffc73d 0,#ffc73d 50%,#54e470 0,#54e470 75%,#0fbbe7 0,#0fbbe7);
+  }
+
+  h2 {
+    margin-top: 32px;
+    font-size: 20px;
+    padding-left: 32px;
+    position: relative;
+
+    .icon {
+      width: 26px;
+      height: 26px;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+      position: absolute;
+      top: 2px;
+      left: 0;
+
+      &.info   {background-image: url(../img/material-icon-info.svg);}
+      &.chart  {background-image: url(../img/material-icon-chart.svg);}
+      &.search {background-image: url(../img/material-icon-search.svg);}
+    }
+  }
+
+  .box {
+    margin-top: 4px;
+    width: 100%;
+    height: 2px;
+  }
+
+  .block-description {
+    font-size: 14px;
+    color: #999;
+  }
+}
+
+
+#cover {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #f6f6f6;
+  z-index: 1000;
+
+  div {
+    position: fixed;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    p {
+      margin-top: 16px;
+      font-size: 13px;
+      line-height: 24px;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+      width: 120px;
+      height: 45.2814px;
+    }
+  }
+}
+
+#container {
+  overflow-x: hidden;
+
+  #title-block {
+    width: 100%;
+    //background: linear-gradient(220.55deg, #FF3F3F 0%, #063CFF 100%);
+    background-color: #fefefe;
+
+    #title-inner {
+      width: calc(100% - 128px);
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 64px 0;
+
+      h3 {
+        margin: 0;
+        margin-top: 8px;
+        font-size: 15px;
+        color: #999;
+      }
+
+      h1 {
+        margin-top: 8px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #222;
+
+        @media only screen and (min-width: 400px) {
+          font-size: 26px;
+        }
+
+        @media only screen and (min-width: 700px) {
+          font-size: 28px;
+        }
+      }
+
+      .box {
+        width: 64px;
+        height: 8px;
+      }
+
+      p {
+        margin-top: 8px;
+        font-size: 14px;
+        line-height: 26px;
+        color: #666;
+
+        @media only screen and (min-width: 400px) {
+          font-size: 15px;
+        }
+
+        @media only screen and (min-width: 700px) {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  #search-block {
+    width: calc(100% - 32px);
+    max-width: 960px;
+    margin: 0 auto;
+
+    #form-block {
+      .control {
+        margin-top: 16px;
+
+        .label {
+          font-size: 14px;
+          color: #333;
+        }
+
+        input,select {
+          margin-top: 4px;
+        }
+
+        button {
+          margin-top: 32px;
+          display: block;
+          width: 108px;
+          height: 36px;
+          color: #fefefe;
+          background-color: #468;
+          background-image: url(../img/material-icon-search-white.svg);
+          background-position: 16px calc(50% + 1px);
+          background-size: 24px;
+          background-repeat: no-repeat;
+          border-radius: 20px;
+          border: none;
+          box-shadow: 1px 0 2px rgba(0, 0, 0, 0.2);
+          padding-left: 12px;
+
+          &:hover {
+            cursor: pointer;
+            opacity: 0.7;
+          }
+        }
+
+        #input-gian-title {
+          width: 100%;
+          max-width: 640px;
+        }
+
+        .control-note {
+          font-size: 13px;
+          color: #999;
+          margin-top: 4px;
+        }
+      }
+
+      .box {
+        width: 100%;
+        height: 1px;
+        margin: 32px 0;
+      }
+    }
+
+    #result-block {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+
+      #result-number {
+        color: #666;
+        font-size: 14px;
+      }
+
+      #download-result {
+        display: inline-block;
+        margin-top: 4px;
+        font-size: 14px;
+      }
+
+      #ul-gian-list {
+        margin-top: 16px;
+
+        li {
+          border-top: 1px solid #ddd;
+          padding: 8px 0;
+
+          div:nth-child(1) {
+            font-size: 13px;
+            color: #932;
+
+            span {
+              color: #369;
+            }
+          }
+
+          div:nth-child(2) {
+            margin-top: 4px;
+            font-size: 15px;
+            font-weight: bold;
+            height: 44px;
+            overflow: hidden;
+          }
+
+          div:nth-child(3) {
+            margin-top: 4px;
+            font-size: 13px;
+            color: #888;
+          }
+
+          &:last-child {
+            border-bottom: 1px solid #ddd;
+          }
+
+          &:hover {
+            background-color: #fefef6;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    #single-gian-block {
+      #single-gian-cover {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 100;
+        background-color: rgba(0, 0, 0, 0);
+        pointer-events: none;
+        transition: all ease 250ms;
+      }
+
+      #single-gian-content {
+        position: fixed;
+        top: 0;
+        right: calc(#{$mobile-max-width} * -1);
+        height: 100vh;
+        overflow-y: scroll;
+        width: calc(100% - 32px);
+        max-width: $mobile-max-width;
+        background-color: #fcfcfc;
+        z-index: 200;
+        padding: 16px;
+        padding-top: 64px;
+        transition: all ease 250ms;
+
+        #single-gian-button-close {
+          $size: 44px;
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          width: $size;
+          height: $size;
+          border: none;
+          border-radius: calc(#{$size} * 0.5);
+          background-color: transparent;
+          background-image: url('../img/material-icon-close.svg');
+          background-position: center center;
+          background-size: 80%;
+          background-repeat: no-repeat;
+
+          &:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.1);
+          }
+        }
+
+        #single-gian-content-inner {
+
+          h3 {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 16px;
+          }
+
+          h4 {
+            margin-top: 32px;
+            font-weight: bold;
+            font-size: 14px;
+          }
+
+          ul {
+            margin-top: 16px;
+
+            li {
+              margin-top: 8px;
+              min-height: 44px;
+
+              div:nth-child(1) {
+                font-size: 13px;
+                color: #aaa;
+              }
+
+              div:nth-child(2) {
+                font-size: 15px;
+                color: #333;
+              }
+            }
+
+            &.keika {
+              margin-left: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #summary-block {
+    width: calc(100% - 32px);
+    max-width: 960px;
+    margin: 0 auto;
+
+    article {
+      margin-top: 64px;
+
+      h4 {
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      p {
+        margin-top: 4px;
+        color: #999;
+        font-size: 14px;
+      }
+
+      .mini-box {
+        width: 32px;
+        height: 1px;
+      }
+
+      .echarts-tooltip {
+        span {
+          font: 15px / 20px sans-serif !important;
+        }
+      }
+    }
+
+    .chart-wrapper {
+      margin-top: 16px;
+      width: 100%;
+      height: 360px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      position: relative;
+
+      canvas {
+        //margin-top: -40px !important;
+      }
+    }
+  }
+
+  #switch-block {
+    #switch {
+      $max-switch-width: 360px;
+      $switch-margin: 16px;
+
+      position: fixed;
+      width: calc(100vw - (#{$switch-margin} * 2));
+      max-width: $max-switch-width;
+      bottom: $switch-margin;
+      left: $switch-margin;
+      background-color: #fafafa;
+      display: flex;
+      border: none;
+      height: 42px;
+      border-radius: 21px;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+
+      @media screen and (min-width: ($max-switch-width + ($switch-margin * 2) + 1)){
+        left: calc(50vw - (#{$max-switch-width} / 2));
+      }
+
+      .switch-item {
+        margin: 1px;
+        color: #999;
+        width: 50%;
+        height: 40px;
+        border-radius: 20px;
+        font-size: 16px;
+        text-align: center;
+        line-height: 40px;
+        padding-left: 16px;
+        background-repeat: no-repeat;
+        background-position: 32px calc(50%);
+        background-size: 28px;
+
+        &:nth-child(1) {
+          background-image: url(../img/material-icon-chart.svg);
+        }
+
+        &:nth-child(2) {
+          background-position: 24px calc(50% + 1px);
+          background-image: url(../img/material-icon-search.svg);
+        }
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        &.selected {
+          background-color: #369;
+          color: #fefefe;
+
+          &:nth-child(1) {
+            background-image: url(../img/material-icon-chart-white.svg);
+          }
+
+          &:nth-child(2) {
+            background-image: url(../img/material-icon-search-white.svg);
+          }
+        }
+      }
+    }
+  }
+
+  #summary-block,#search-block {
+    display: none;
+
+    &.show {
+      display: block;
+    }
+  }
+
+  #footer-block {
+    margin: 0 auto;
+    margin-top: 64px;
+    margin-bottom: 96px;
+    width: calc(100% - 32px);
+    max-width: 960px;
+
+    .box {
+      width: 100%;
+      height: 2px;
+      margin: 4px 0 16px 0;
+    }
+
+    .box-2 {
+      width: 100%;
+      height: 1px;
+      margin-top: 64px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    a.logo {
+      display: block;
+      width: 240px;
+      height: 30px;
+      margin: 0 auto;
+      margin-top: 32px;
+      background-image: url(../img/smri-logo.svg);
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+    #social-buttons {
+      width: fit-content;
+      margin: 64px auto 32px auto;
+
+      .social-button {
+        display: inline-block;
+
+        a {
+          display: block;
+          margin: 0 8px;
+          width: 48px;
+          height: 48px;
+          border: 1px solid #fefefe;
+          border-radius: 50%;
+          background-size: contain;
+          background-position: center center;
+          background-repeat: no-repeat;
+          z-index: 10;
+
+          &.facebook {background-image:url(../img/social-icon-facebook.svg);}
+          &.twitter  {background-image:url(../img/social-icon-twitter.svg);}
+          &.line     {background-image:url(../img/social-icon-line.png);}
+          &.copy     {background-image:url(../img/social-icon-copy.svg);
+            background-color: #999;
+            background-size: 65%;
+          }
+        }
+
+        div {
+          margin-top: 4px;
+          color: #999;
+          font-size: 12px;
+          text-align: center;
+
+          &.text-copy {
+            &:before {
+              content: "Copy";
+            }
+
+            &.copied {
+              color: #a32;
+
+              &:before {
+                content: "Copied!";
+              }
+            }
+          }
+        }
+      }
+
+      .margin {
+        display: table-cell;
+        width: 24px;
+      }
+    }
+  }
+}
+
+body.single-gian-show {
+  overflow-y: hidden;
+
+  #single-gian-cover {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    pointer-events: auto !important;
+  }
+
+  #single-gian-content {
+    right: 0px !important;
+  }
+}

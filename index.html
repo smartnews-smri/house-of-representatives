@@ -1,0 +1,173 @@
+<!doctype html>
+<html class="no-js" lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta property="og:url" content="" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="国会議案データベース - スマートニュース メディア研究所" />
+  <meta property="og:description" content="衆議院のウェブサイト「議案情報」から国会に提出された議案をデータベース化しました。" />
+  <meta property="og:image" content="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="css/style.min.css"/>
+  <title>国会議案データベース - スマートニュース メディア研究所</title>
+</head>
+<body>
+  <div id="cover">
+    <div>
+      <p>データを読み込んでいます…</p>
+      <p>表示されない場合は<br /><a href="./">ページを更新</a>してください。</p>
+    </div>
+  </div>
+  <div id="container">
+    <section id="title-block">
+      <div id="title-inner">
+        <div class="sn-color box"></div>
+        <h3>スマートニュース メディア研究所</h3>
+        <h1>国会議案データベース</h1>
+        <p>衆議院のウェブサイト「議案情報」から国会に提出された議案をデータベース化しました。</p>
+      </div>
+    </section>
+    <section id="summary-block" class="show">
+      <h2><div class="icon chart"></div>集計情報</h2>
+      <p class="block-description">審議状況や政党別賛否など項目別の集計データを表示します。</p>
+      <div class="box sn-color"></div>
+      <article>
+        <h4>審議状況</h4>
+        <p>議案ごとの審議状況。途中経過は含まず、それぞれの議案について最新分のみ集計</p>
+        <div class="chart-wrapper" id="summary-chart-status">
+          <div class="inner"></div>
+        </div>
+      </article>
+      <article>
+        <h4>委員会</h4>
+        <p>「衆議院付託委員会」を集計</p>
+        <div class="chart-wrapper" id="summary-chart-committee">
+          <div class="inner"></div>
+        </div>
+      </article>
+      <article>
+        <h4>議案提出者</h4>
+        <p>議案を提出した国会議員。総務委員長などの役職名は除く</p>
+        <div class="chart-wrapper" id="summary-chart-submitter">
+          <div class="inner"></div>
+        </div>
+      </article>
+      <article>
+        <h4>政党別の賛否</h4>
+        <p>議案に対する政党別の賛成数・反対数。同じ政党でも会派の違いで複数項目にまたがる場合がある</p>
+        <div class="chart-wrapper" id="summary-chart-foragainst">
+          <div class="inner"></div>
+        </div>
+      </article>
+      <div id="parties-block"></div>
+    </section>
+    <section id="search-block" class="">
+      <h2><div class="icon search"></div>議案検索</h2>
+      <p class="block-description">議案の件名や提出者名、賛成・反対の政党別に議案を検索</p>
+      <div class="box sn-color"></div>
+      <div id="form-block">
+        <form id="form-gian-search" action="./">
+          <div class="control">
+            <div class="label">議案名</div>
+            <input type="text" id="input-gian-title" placeholder="議案名で検索" />
+            <div class="control-note">検索キーワードの例：<span id="keywords"></span></div>
+          </div>
+          <div class="control">
+            <div class="label">議案の種類</div>
+            <select id="select-gian-type">
+              <option value="">指定なし</option>
+            </select>
+          </div>
+          <div class="control">
+            <div class="label">議案の審議状況</div>
+            <select id="select-gian-status">
+              <option value="">指定なし</option>
+            </select>
+          </div>
+          <div class="control">
+            <div class="label">議案提出者</div>
+            <input type="text" id="input-gian-submitter" placeholder="例：浅田均" />
+          </div>
+          <div class="control">
+            <div class="label">賛成した政党（会派）</div>
+            <select id="select-party-for">
+              <option value="">指定なし</option>
+            </select>
+            <div class="control-note">「指定なし」以外を選ぶと、採決が行われなかった議案はヒットしません。</div>
+          </div>
+          <div class="control">
+            <div class="label">反対した政党（会派）</div>
+            <select id="select-party-against">
+              <option value="">指定なし</option>
+            </select>
+            <div class="control-note">「指定なし」以外を選ぶと、採決が行われなかった議案はヒットしません。</div>
+          </div>
+          <div class="control">
+            <button type="submit">検索</button>
+          </div>
+        </form>
+        <div class="sn-color box"></div>
+      </div>
+      <div id="result-block">
+        <p id="result-number"></p>
+        <a href="" id="download-result"></a>
+        <ul id="ul-gian-list"></ul>
+      </div>
+      <div id="single-gian-block">
+  			<div id="single-gian-cover"></div>
+  			<div id="single-gian-content">
+          <button id="single-gian-button-close"></button>
+          <div id="single-gian-content-inner">
+            <h3></h3>
+            <ul id="ul-single-gian-items"></ul>
+            <div id="single-gian-content-keika"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="switch-block">
+      <div id="switch">
+				<div class="switch-item selected" code="summary">集計情報</div>
+				<div class="switch-item" code="search">議案検索</div>
+			</div>
+    </section>
+    <section id="footer-block">
+      <h2><div class="icon info"></div>このページについて</h2>
+      <div class="box sn-color"></div>
+      <p>・衆議院「<a href="https://www.shugiin.go.jp/internet/itdb_gian.nsf/html/gian/menu.htm" target="_blank">議案情報</a>」ページから、国会に提出された議案をデータベース化したものです。</p>
+      <p>・「集計情報」では成立した/撤回された議案の数、議案を提出した国会議員、政党別の議案への賛否などの集計を見ることができます。</p>
+      <p>・また「議案検索」では議案の件名や提出者、賛成・反対した政党名などから議案を検索できます。検索結果だけを選んでダウンロードすることも可能です。</p>
+      <p>・データは原則として1日1回更新する予定ですが、予告なく変更・更新停止することがあります。</p>
+      <p>・すべてのデータとソースコードは<a href="https://github.com/smartnews-smri/national-diet-bills" target="_blank">スマートニュース メディア研究所のGitHub</a>で公開しており、自由に閲覧・ダウンロードが可能です。</p>
+      <p>・GitHubプロジェクトのライセンスはMITライセンスとしています。商用・非商用を問わずご自由にお使いいただけます。</p>
+      <p>・データやソースコードを引用する際の著作権表記は『スマートニュース メディア研究所「国会議案データベース」』としてください。</p>
+      <p>・なお、本プロジェクトの利用によって生じたいかなる損害についても、開発者およびスマートニュース株式会社は一切責任を負いません。</p>
+      <div id="social-buttons">
+        <div class="social-button">
+          <a class="copy" href="" id="social-button-copy"></a>
+          <div class="text-copy"></div>
+        </div>
+        <div class="social-button">
+          <a class="line" target="_blank" href="https://line.me/R/msg/text/?%E5%9B%BD%E4%BC%9A%E8%AD%B0%E6%A1%88%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%20-%20%E3%82%B9%E3%83%9E%E3%83%BC%E3%83%88%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B9%20%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E7%A0%94%E7%A9%B6%E6%89%80%20https%3A%2F%2Fsmartnews-smri.github.io%2Fnational-diet-bills%2F"></a>
+          <div>LINE</div>
+        </div>
+        <div class="social-button">
+          <a class="facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsmartnews-smri.github.io%2Fnational-diet-bills%2F"></a>
+          <div>Facebook</div>
+        </div>
+        <div class="social-button">
+          <a class="twitter" target="_blank" href="https://twitter.com/share?url=https%3A%2F%2Fsmartnews-smri.github.io%2Fnational-diet-bills%2F&text=%E5%9B%BD%E4%BC%9A%E8%AD%B0%E6%A1%88%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%20-%20%E3%82%B9%E3%83%9E%E3%83%BC%E3%83%88%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B9%20%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E7%A0%94%E7%A9%B6%E6%89%80%0D%0A"></a>
+          <div>Twitter</div>
+        </div>
+      </div>
+      <div class="box-2 sn-color"></div>
+      <a class="logo" href="https://smartnews-smri.com/" target="_blank"></a>
+    </section>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+  <script src="js/script.min.js"></script>
+</body>
+</html>
