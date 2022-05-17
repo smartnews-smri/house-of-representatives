@@ -103,17 +103,17 @@ body {
   h2 {
     margin-top: 32px;
     font-size: 20px;
-    padding-left: 32px;
+    padding-left: 24px;
     position: relative;
 
     .icon {
-      width: 26px;
-      height: 26px;
+      width: 22px;
+      height: 22px;
       background-repeat: no-repeat;
       background-position: center center;
       background-size: contain;
       position: absolute;
-      top: 2px;
+      top: 4px;
       left: 0;
 
       &.info   {background-image: url(../img/material-icon-info.svg);}
@@ -176,7 +176,7 @@ body {
     background-color: #fefefe;
 
     #title-inner {
-      width: calc(100% - 128px);
+      width: calc(100% - 32px);
       max-width: 960px;
       margin: 0 auto;
       padding: 64px 0;
@@ -206,6 +206,7 @@ body {
       .box {
         width: 64px;
         height: 8px;
+        margin-left: 2px;
       }
 
       p {
@@ -249,7 +250,7 @@ body {
           width: 108px;
           height: 36px;
           color: #fefefe;
-          background-color: #468;
+          background-color: #369;
           background-image: url(../img/material-icon-search-white.svg);
           background-position: 16px calc(50% + 1px);
           background-size: 24px;
@@ -526,7 +527,7 @@ body {
         }
 
         &.selected {
-          background-color: #369;
+          background-color: #a32;
           color: #fefefe;
 
           &:nth-child(1) {
@@ -588,7 +589,7 @@ body {
 
     #social-buttons {
       width: fit-content;
-      margin: 64px auto 32px auto;
+      margin: 64px auto 64px auto;
 
       .social-button {
         display: inline-block;

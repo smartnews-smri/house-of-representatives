@@ -53,16 +53,16 @@ body {
   body h2 {
     margin-top: 32px;
     font-size: 20px;
-    padding-left: 32px;
+    padding-left: 24px;
     position: relative; }
     body h2 .icon {
-      width: 26px;
-      height: 26px;
+      width: 22px;
+      height: 22px;
       background-repeat: no-repeat;
       background-position: center center;
       background-size: contain;
       position: absolute;
-      top: 2px;
+      top: 4px;
       left: 0; }
       body h2 .icon.info {
         background-image: url(../img/material-icon-info.svg); }
@@ -109,7 +109,7 @@ body {
     width: 100%;
     background-color: #fefefe; }
     #container #title-block #title-inner {
-      width: calc(100% - 128px);
+      width: calc(100% - 32px);
       max-width: 960px;
       margin: 0 auto;
       padding: 64px 0; }
@@ -131,7 +131,8 @@ body {
             font-size: 28px; } }
       #container #title-block #title-inner .box {
         width: 64px;
-        height: 8px; }
+        height: 8px;
+        margin-left: 2px; }
       #container #title-block #title-inner p {
         margin-top: 8px;
         font-size: 14px;
@@ -160,7 +161,7 @@ body {
         width: 108px;
         height: 36px;
         color: #fefefe;
-        background-color: #468;
+        background-color: #369;
         background-image: url(../img/material-icon-search-white.svg);
         background-position: 16px calc(50% + 1px);
         background-size: 24px;
@@ -341,7 +342,7 @@ body {
         cursor: pointer;
         background-color: rgba(0, 0, 0, 0.1); }
       #container #switch-block #switch .switch-item.selected {
-        background-color: #369;
+        background-color: #a32;
         color: #fefefe; }
         #container #switch-block #switch .switch-item.selected:nth-child(1) {
           background-image: url(../img/material-icon-chart-white.svg); }
@@ -381,7 +382,7 @@ body {
       background-repeat: no-repeat; }
     #container #footer-block #social-buttons {
       width: fit-content;
-      margin: 64px auto 32px auto; }
+      margin: 64px auto 64px auto; }
       #container #footer-block #social-buttons .social-button {
         display: inline-block; }
         #container #footer-block #social-buttons .social-button a {

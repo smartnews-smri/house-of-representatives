@@ -75,8 +75,6 @@ const init = () => {
           config_labels.push(key);
         }
 
-        //console.log(array);
-
         const params = {
           domid: dom_id,
           labels: config_labels,
@@ -273,7 +271,13 @@ const init = () => {
           }
         });
 
-        drawChart(getParams(submitters, 'summary-chart-submitter'));
+        let submitters2 = {};
+        for (let key in submitters) {
+          const s = submitters[key];
+          if (s >= 5) submitters2[key] = s;
+        }
+
+        drawChart(getParams(submitters2, 'summary-chart-submitter'));
       }
 
       const showForAgainst = () => {
@@ -564,7 +568,11 @@ const init = () => {
         $("#result-number").text(addCommas(gian_results) + "件ヒットしました。");
       }
 
-      $("#download-result").text("検索結果（途中経過含め" + keika_results + "件）をCSVでダウンロードする");
+      if (gian_results === 0) {
+        $("#download-result").text("");
+      } else {
+        $("#download-result").text("検索結果（途中経過含め" + keika_results + "件）をCSVでダウンロードする");
+      }
 
 
       $("li").on("click", function(){
