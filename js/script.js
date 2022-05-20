@@ -92,6 +92,7 @@ const init = () => {
         const $inner = $wrapper.find(".inner")[0];
 
         $inner.style.height = 20 + (params.datasets[0].data.length * 20) + "px";
+        if (params.domid === "summary-chart-foragainst") $inner.style.height = parseInt($inner.style.height.replace("px", "")) * 1.2 + "px";
 
         const myChart = echarts.init($inner);
         let option = {
