@@ -298,7 +298,7 @@ body {
         width: 32px;
         height: 1px; }
       #container #summary-block article .echarts-tooltip span {
-        font: 15px / 20px sans-serif !important; }
+        font: 15px / 20px "Roboto" !important; }
     #container #summary-block .chart-wrapper {
       margin-top: 16px;
       width: 100%;

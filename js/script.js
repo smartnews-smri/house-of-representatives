@@ -120,6 +120,7 @@ const init = () => {
             textStyle: {
               color: "#fefefe",
               fontSize: 13,
+              fontFamily: "Roboto"
             },
             formatter: ((d) => {
               //console.log(d);
@@ -156,6 +157,7 @@ const init = () => {
               }
             },
             axisLabel: {
+              fontFamily: "Roboto",
               formatter: ((d) => {
                 return addCommas(d);
               })
@@ -184,6 +186,7 @@ const init = () => {
               textBorderColor: "#fff",
               textBorderWidth: 0,
               color: "#47a",
+              fontFamily: "Roboto",
               formatter: ((d) => {
                 return addCommas(d.data);
               })
@@ -261,16 +264,13 @@ const init = () => {
 
         data.gian_summary.map(gian => {
           let name = gian[6];
-          let i = 0;
 
           if (name.indexOf("君外") !== -1) {
             name = name.split("君外")[0].replace("　", " ");
-            i = 1;
           }
 
           if (name.slice(-1) === "君") {
             name = name.substr(0, -1).replace("　", " ");
-            i = 1;
           }
 
           if (name !== "") {
