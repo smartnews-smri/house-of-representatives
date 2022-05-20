@@ -1,30 +1,8 @@
 @charset "UTF-8";
 
-$width-2col: 720px;
-$width-3col: 1440px;
-$box-width: 520px;
-
-$box-background: #fefefe;
-
-$box-large: 640px;
-
-$color-medical-staff: #8DABA1;
-$color-senior-citizen: #8fb5ba;
-
+@import url('http://fonts.cdnfonts.com/css/roboto');
 
 $mobile-max-width: 428px;
-
-
-@mixin box-large(){
-  @media screen and (min-width: $box-width) and (max-width: $width-2col - 1){
-    @content
-  }
-
-  @media screen and (min-width: $box-width * 2){
-    @content
-  }
-}
-
 
 
 
