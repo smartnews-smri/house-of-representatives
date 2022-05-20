@@ -88,22 +88,18 @@ const init = () => {
       }
 
       const drawChart = (params) => {
-        //console.log(params);
         const $wrapper = $("#" + params.domid);
         const $inner = $wrapper.find(".inner")[0];
 
-        $inner.style.height = 20 + (params.datasets[0].data.length * 19) + "px";
-
-        //$wrapper.style.maxHeight = 20 + (params.datasets[0].data.length * 20) + "px";
-        //$wrapper.find()attr("maxh", 20 + (params.datasets[0].data.length * 20) + "px");
+        $inner.style.height = 20 + (params.datasets[0].data.length * 20) + "px";
 
         const myChart = echarts.init($inner);
         let option = {
           legend: {
-            show: ((params.domid === "summary-chart-foragainst") ? true: false)
+            show: ((params.datasets.length >= 2) ? true: false)
           },
           grid: {
-            top: ((params.domid === "summary-chart-foragainst") ? '40px': '0'),
+            top: ((params.datasets.length >= 2) ? '40px': '0'),
             left: '3%',
             right: '6%',
             bottom: '3%',
@@ -178,7 +174,7 @@ const init = () => {
             type: 'bar',
             stack: 'total',
             label: {
-              show: (params.domid !== "summary-chart-foragainst") ? true : false,
+              show: (params.datasets.length === 1) ? true: false,
               position: "right",
               textBorderColor: "#fff",
               textBorderWidth: 0,
@@ -259,15 +255,24 @@ const init = () => {
         let submitters = {};
 
         data.gian_summary.map(gian => {
-          const info = gian[6];
-          if (info.indexOf("君外") !== -1) {
-            const name = info.split("君外")[0].replace("　", "");
-            if (name !== "") {
-              if (!submitters[name]) {
-                submitters[name] = 0;
-              }
-              submitters[name] += 1;
+          let name = gian[6];
+          let i = 0;
+
+          if (name.indexOf("君外") !== -1) {
+            name = name.split("君外")[0].replace("　", " ");
+            i = 1;
+          }
+
+          if (name.slice(-1) === "君") {
+            name = name.substr(0, -1).replace("　", " ");
+            i = 1;
+          }
+
+          if (name !== "") {
+            if (!submitters[name]) {
+              submitters[name] = 0;
             }
+            submitters[name] += 1;
           }
         });
 
@@ -283,15 +288,21 @@ const init = () => {
       const showForAgainst = () => {
         let parties = {};
 
+        PARTIES.map((ps) => {
+          ps.map((p) => {
+            parties[p] = [0, 0];
+          });
+        });
+
         data.gian_summary.map(gian => {
           gian[7].map(row => {
             if (row[15] != "") {
               [row[15], row[16]].map((fas, j) => {
-                fas.split("; ").map((party) => {
-                  if (party !== "") {
-                    if (!parties[party]) {
-                      parties[party] = [0, 0];
-                    }
+                fas = fas.replaceAll("; ", "／");
+                fas = fas.replaceAll(";", "／");
+                fas = fas.replaceAll("・", "／");
+                fas.split("／").map((party) => {
+                  if (party in parties) {
                     parties[party][j] += 1;
                   }
                 });
@@ -299,8 +310,6 @@ const init = () => {
             }
           });
         });
-
-        //console.log(parties);
 
         let array2 = Object.keys(parties).map((k)=>({key: k, for: parties[k][0], agn: parties[k][1]}));
         array2.sort((a, b) => (a.for + a.agn) - (b.for + b.agn));
