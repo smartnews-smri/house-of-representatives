@@ -135,7 +135,11 @@ const init = () => {
               let ret = title;
               d.map((r, i) => {
                 let prefix = (params.datasets[i].name !== "") ? params.datasets[i].name + "：": "";
-                ret += "<br>" + prefix + "<span>" + addCommas(r.value) + "</span> 件"
+                ret += "<br>" + prefix + "<span>" + addCommas(r.value) + "</span> 件";
+                if (params.domid === "summary-chart-foragainst") {
+                  const total = d.reduce((g, e) => g + e.value, 0);
+                  ret += "（" + ((r.value * 100) / total).toFixed(1) + "％）"
+                }
               });
               return ret;
             })
