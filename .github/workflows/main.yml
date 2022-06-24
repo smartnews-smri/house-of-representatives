@@ -1,8 +1,6 @@
 name: main
 
 on:
-  schedule:
-    - cron: '0 1 * * MON,TUE,WED,THU,FRI'
   workflow_dispatch:
 
 jobs:
