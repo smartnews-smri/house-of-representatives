@@ -625,8 +625,8 @@ const init = () => {
         let data = headers.join(",") + "\n";
 
         gResults.map(row => {
-          row[7].map((keikarow, i) => {
-            data += [row[0], row[1], row[2], row[3], row[6]].join(",") + "," + keikarow.join(",") + "\n";
+          row[10].map((keikarow, i) => {
+            data += [row[0], row[1], row[2], row[3], row[6], row[7], row[8], row[9]].join(",") + "," + keikarow.join(",") + "\n";
           });
         });
 
