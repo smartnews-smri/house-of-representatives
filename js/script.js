@@ -11,7 +11,10 @@ const init = () => {
     "議案件名",
     "審議回次",
     "審議状況",
-    "議案提出者"
+    "議案提出者",
+    "議案提出会派",
+    "議案提出者一覧",
+    "議案提出の賛成者"
   ];
 
   const KEIKA_HEADERS = [
@@ -22,7 +25,6 @@ const init = () => {
     "本文情報",
     "本文情報URL",
     "議案種類",
-    "議案提出者",
     "衆議院予備審査議案受理年月日",
     "衆議院予備付託年月日／衆議院予備付託委員会",
     "衆議院議案受理年月日",
@@ -242,8 +244,8 @@ const init = () => {
         let committees = {};
 
         data.gian_summary.map(gian => {
-          gian[7].map(info => {
-            const cominfo = info[11];
+          gian[10].map(info => {
+            const cominfo = info[10];
             if (cominfo.indexOf("／") !== -1) {
               const name = cominfo.split("／")[1];
               if (name !== "" && name !== "審査省略") {
@@ -300,9 +302,9 @@ const init = () => {
         });
 
         data.gian_summary.map(gian => {
-          gian[7].map(row => {
-            if (row[15] != "") {
-              [row[15], row[16]].map((fas, j) => {
+          gian[10].map(row => {
+            if (row[14] != "") {
+              [row[14], row[15]].map((fas, j) => {
                 fas = fas.replaceAll("; ", "／");
                 fas = fas.replaceAll(";", "／");
                 fas = fas.replaceAll("・", "／");
@@ -424,7 +426,7 @@ const init = () => {
     $inner.find("h3").text(gian[3]);
     $("#ul-single-gian-items").empty();
 
-    [0,1,2,4,5,6].map(i => {
+    [0,1,2,4,5,6,7,8,9].map(i => {
       const header = HEADERS[i];
       const value = gian[i];
 
@@ -436,7 +438,7 @@ const init = () => {
       $("#ul-single-gian-items").append(li);
     });
 
-    gian[7].map(keika => {
+    gian[10].map(keika => {
       $keika.append('<h4>第' + keika[0] + '回の経過情報</h4>');
       $keika.append('<ul class="keika"></ul>');
       $ul = $keika.find('ul.keika:last');
@@ -547,14 +549,14 @@ const init = () => {
         if (gian[0].indexOf(type) === -1) hit = false;
         if (gian[5].indexOf(status) === -1) hit = false;
 
-        gian[7].map(keika => {
-          if (!matchParty(party_f, keika[15])) hit = false;
-          if (!matchParty(party_a, keika[16])) hit = false;
+        gian[10].map(keika => {
+          if (!matchParty(party_f, keika[14])) hit = false;
+          if (!matchParty(party_a, keika[15])) hit = false;
         });
 
         if (hit) {
           gian_results  += 1;
-          keika_results += gian[7].length;
+          keika_results += gian[10].length;
           gResults.push(gian);
 
           if (gian_results <= MAX_RESULTS) {
@@ -639,7 +641,7 @@ const init = () => {
       const n = now.getMinutes();
       const s = now.getSeconds();
       const data = getResultsToArray();
-      const filename = "smri-national-diet-bills-" + y + m + d + h + n + s + ".csv";
+      const filename = "smri-house-of-representatives-" + y + m + d + h + n + s + ".csv";
       const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
       const blob = new Blob([bom, data], {type: "text/csv"});
 
@@ -657,7 +659,7 @@ const init = () => {
 
     $("#social-button-copy").on("click", function(e){
       e.preventDefault();
-      let text = "国会議案データベース - スマートニュース メディア研究所\nhttps://smartnews-smri.github.io/national-diet-bills/";
+      let text = "国会議案データベース - スマートニュース メディア研究所\nhttps://smartnews-smri.github.io/house-of-representatives/";
       let $textarea = $('<textarea></textarea>');
       $textarea.text(text);
       $(this).append($textarea);
