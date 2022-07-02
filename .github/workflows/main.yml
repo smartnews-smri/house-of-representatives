@@ -1,0 +1,33 @@
+name: main
+
+on:
+  schedule:
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+          architecture: 'x64'
+      - name: Get Python version
+        run: python -V
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run Python
+        run: python main.py
+      - name: git setting
+        run: |
+          git config --local user.email "example@smartnews.com"
+          git config --local user.name "data-updater"
+      - name: Commit files
+        run: |
+          git add .
+          git commit -m "Update data" -a
+          git pull
+          git push origin main
