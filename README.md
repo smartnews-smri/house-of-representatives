@@ -12,7 +12,7 @@
 ## 公開データの見方
 
 - [/data](https://github.com/smartnews-smri/house-of-representatives/tree/main/data)にデータファイルを公開しています。原則としてCSVとJSONの両方で公開します。
-  - gian：すべての議案データを掲載したファイルです。途中経過も含むため、議案そのものの数よりも大きくなります。たとえば第150回国会に提出され、第151回で成立した議案は掲載回次「150」および「151」のデータが2行発生します。
+  - [gian.csv](https://github.com/smartnews-smri/house-of-representatives/blob/main/data/gian.csv) / [gian.json](https://github.com/smartnews-smri/house-of-representatives/blob/main/data/gian.json)：すべての議案データを掲載したファイルです。途中経過も含むため、議案そのものの数よりも大きくなります。たとえば第150回国会に提出され、第151回で成立した議案は掲載回次「150」および「151」のデータが2行発生します。
     - 掲載回次：議案が掲載された国会の回次。
     - キャプション：議案情報ページのテーブルに付されたキャプション。
     - 種類〜審議状況：それぞれ議案情報ページにあるテーブルの同名列。
@@ -20,11 +20,11 @@
     - 本文情報 / 本文情報URL：議案情報ページにあるテーブル「本文情報」列のテキストとリンクURL。
     - 議案種類〜議案提出の賛成者：それぞれ議案経過情報ページにあるテーブルの同名列。
     - なお「議案提出回次」「議案番号」「議案件名」は、それぞれ「提出回次」「番号」「議案件名」と重複するため掲載していない。
-  - gian_summary：gian_allから掲載回次の重複を排除したもの。
+  - [gian_summary.json](https://github.com/smartnews-smri/house-of-representatives/blob/main/data/gian_summary.json)：gianから掲載回次の重複を排除したもの。
     - 提出回次、種類、番号、議案件名が同じものを同じ議案と判断しています。
     - データ構造の関係からJSON形式だけで公開しています。
-  - gian_status：gian_allから「審議状況」のデータを集計したもの。
-  - gian_type：gian_allから「種類」のデータを集計したもの。
+  - [gian_status.csv](https://github.com/smartnews-smri/house-of-representatives/blob/main/data/gian_status.csv) / [gian_status.json](https://github.com/smartnews-smri/house-of-representatives/blob/main/data/gian_status.json)：gianから「審議状況」のデータを集計したもの。
+  - [gian_type.csv](https://github.com/smartnews-smri/house-of-representatives/blob/main/data/gian_type.csv) / [gian_type.json](https://github.com/smartnews-smri/house-of-representatives/blob/main/data/gian_type.json)：gianから「種類」のデータを集計したもの。
 
 
 ## 閲覧用ページについて
