@@ -9,6 +9,10 @@ import json
 import glob
 import os
 
+# The pages say charset=Shift_JIS but use Windows-31J (cp932) characters such as
+# Ⅰ and Ⅸ, which Python's shift_jis codec turns into U+FFFD.
+ENCODING = "cp932"
+
 
 
 #-------------------------------------------------------------
@@ -22,6 +26,7 @@ def get_content_folder():
 
 def get_latest_kaiji():
   r = requests.get(get_kaiji_url(""))
+  r.encoding = ENCODING
   html = BeautifulSoup(r.text, "html.parser")
   title = html.find("title").text  # ex. "第208回国会　議案の一覧"
 
@@ -136,6 +141,7 @@ def parse_kaiji(kaiji):
     ]]
 
     r = requests.get(get_kaiji_url(kaiji))
+    r.encoding = ENCODING
     html = BeautifulSoup(r.text, "html.parser")
     tables = html.find_all('table')
 
@@ -196,6 +202,7 @@ def parse_kaiji(kaiji):
       time.sleep(1)
       url = row[8]
       r = requests.get(url)
+      r.encoding = ENCODING
       html = BeautifulSoup(r.text, "html.parser")
 
       tds = html.find_all("td")
